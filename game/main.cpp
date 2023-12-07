@@ -37,11 +37,9 @@ void events(SDL_Event& event)
 {
 	while (SDL_PollEvent(&event) != 0) {
         if (event.type == SDL_QUIT) {
-            // User clicks the close button
             exit(0);
         }
         else if (event.type == SDL_KEYDOWN) {
-            // Handle key presses
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
                     pY -= 8;
@@ -65,12 +63,10 @@ void gameRender()
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    // Draw the player
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_Rect playerRect = { pX, pY, pSize, pSize };
     SDL_RenderFillRect(renderer, &playerRect);
 
-    // Present the renderer
     SDL_RenderPresent(renderer);
 }
 void cleanup() 
@@ -86,8 +82,7 @@ int main() {
     }
 
     SDL_Event event;
-
-    // Game loop
+	
     bool quit = false;
     while (!quit) {
         events(event);
