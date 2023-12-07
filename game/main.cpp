@@ -58,7 +58,7 @@ void events(SDL_Event& event)
                     break;
                 case SDLK_RIGHT:
                     if (pX + pSize + 8 <= s_WIDTH) {
-                        playerX += 8;
+                        pX += 8;
                     }
                     break;
             }
