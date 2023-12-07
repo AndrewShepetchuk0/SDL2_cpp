@@ -42,16 +42,24 @@ void events(SDL_Event& event)
         else if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
-                    pY -= 8;
+                    if(pY - 8 >= 0){
+			    pY -= 8
+		    }
                     break;
                 case SDLK_DOWN:
-                    pY += 8;
+                    if (pY + pSize + 8 <= s_HEIGHT) {
+                        pY += 8;
+                    }
                     break;
                 case SDLK_LEFT:
-                    pX -= 8;
+                    if (pX - 8 >= 0) {
+                        pX -= 8;
+                    }
                     break;
                 case SDLK_RIGHT:
-                    pX += 8;
+                    if (pX + pSize + 8 <= s_WIDTH) {
+                        playerX += 8;
+                    }
                     break;
             }
         }
