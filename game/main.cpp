@@ -43,7 +43,7 @@ void events(SDL_Event& event)
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
                     if(pY - 8 >= 0){
-			    pY -= 8
+			    pY -= 8;
 		    }
                     break;
                 case SDLK_DOWN:
