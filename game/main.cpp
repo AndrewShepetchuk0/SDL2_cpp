@@ -6,7 +6,7 @@ const int s_HEIGHT = 512;
 const int pSize = 32;
 int pX = s_WIDTH / 2 - pSize / 2;
 int pY = s_HEIGHT / 2 - pSize / 2;
-float speed = 2f;
+float speed = 0.8f;
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
 
