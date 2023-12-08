@@ -97,7 +97,6 @@ int main() {
         gameUpdate();
         gameRender();
     }
-
     cleanup();
     return 0;
 }
