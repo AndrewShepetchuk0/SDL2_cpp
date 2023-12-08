@@ -1,5 +1,5 @@
 #include <iostream>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <thread>
 
 const int SCREEN_WIDTH = 800;
@@ -80,18 +80,43 @@ void gameLoop() {
 }
 
 int main(int argc, char* args[]) {
-    SDL_Init(SDL_INIT_VIDEO);
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        std::cerr << "SDL initialization failed: " << SDL_GetError() << std::endl;
+        return 1;
+    }
 
     window = SDL_CreateWindow("SDL2 RPG Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    if (!window) {
+        std::cerr << "Window creation failed: " << SDL_GetError() << std::endl;
+        SDL_Quit();
+        return 1;
+    }
+
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    if (!renderer) {
+        std::cerr << "Renderer creation failed: " << SDL_GetError() << std::endl;
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
 
     std::thread gameThread(gameLoop);
+
+    // Wait for the user to close the window
+    SDL_Event event;
+    while (true) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                break;
+            }
+        }
+    }
 
     gameThread.join(); // Wait for the game loop thread to finish
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    SDL_Quit(); // Make sure to call SDL_Quit
+    SDL_Quit();
 
     return 0;
 }
