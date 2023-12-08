@@ -87,11 +87,11 @@ int main(int argc, char* args[]) {
 
     std::thread gameThread(gameLoop);
 
+    gameThread.join(); // Wait for the game loop thread to finish
+
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    SDL_Quit();
-
-    gameThread.join(); // Wait for the game loop thread to finish
+    SDL_Quit(); // Make sure to call SDL_Quit
 
     return 0;
 }
