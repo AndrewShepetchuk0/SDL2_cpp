@@ -6,6 +6,7 @@ const int s_HEIGHT = 512;
 const int pSize = 32;
 int pX = s_WIDTH / 2 - pSize / 2;
 int pY = s_HEIGHT / 2 - pSize / 2;
+int speed = 2;
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
 
@@ -41,22 +42,22 @@ void events(SDL_Event& event)
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
                     if(pY - 8 >= 0){
-			    pY -= 8;
+			    pY -= 8 * speed;
 		    }
                     break;
                 case SDLK_DOWN:
                     if (pY + pSize + 8 <= s_HEIGHT) {
-                        pY += 8;
+                        pY += 8 * speed;
                     }
                     break;
                 case SDLK_LEFT:
                     if (pX - 8 >= 0) {
-                        pX -= 8;
+                        pX -= 8 * speed;
                     }
                     break;
                 case SDLK_RIGHT:
                     if (pX + pSize + 8 <= s_WIDTH) {
-                        pX += 8;
+                        pX += 8 * speed;
                     }
                     break;
             }
