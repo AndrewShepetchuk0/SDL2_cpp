@@ -41,29 +41,30 @@ void events(SDL_Event& event)
         else if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
-                    if(pY - 8 >= 0){
-			    pY -= 8 * speed;
-		    }
+                    playerY -= PLAYER_SPEED * getDeltaTime();
                     break;
                 case SDLK_DOWN:
-                    if (pY + pSize + 8 <= s_HEIGHT) {
-                        pY += 8 * speed;
-                    }
+                    playerY += PLAYER_SPEED * getDeltaTime();
                     break;
                 case SDLK_LEFT:
-                    if (pX - 8 >= 0) {
-                        pX -= 8 * speed;
-                    }
+                    playerX -= PLAYER_SPEED * getDeltaTime();
                     break;
                 case SDLK_RIGHT:
-                    if (pX + pSize + 8 <= s_WIDTH) {
-                        pX += 8 * speed;
-                    }
+                    playerX += PLAYER_SPEED * getDeltaTime();
                     break;
             }
         }
     }
 }
+float getDeltaTime() 
+{
+    static Uint32 prevTicks = SDL_GetTicks();
+    Uint32 currentTicks = SDL_GetTicks();
+    Uint32 deltaTicks = currentTicks - prevTicks;
+    prevTicks = currentTicks;
+    return static_cast<float>(deltaTicks) / 1000.0f;
+}
+
 void gameUpdate(){}
 void gameRender()
 {
