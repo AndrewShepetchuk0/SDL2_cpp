@@ -10,6 +10,14 @@ float speed = 0.8f;
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
 
+float getDeltaTime() 
+{
+    static Uint32 prevTicks = SDL_GetTicks();
+    Uint32 currentTicks = SDL_GetTicks();
+    Uint32 deltaTicks = currentTicks - prevTicks;
+    prevTicks = currentTicks;
+    return static_cast<float>(deltaTicks) / 1000.0f;
+}
 bool sdlInit()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) 
@@ -55,14 +63,6 @@ void events(SDL_Event& event)
             }
         }
     }
-}
-float getDeltaTime() 
-{
-    static Uint32 prevTicks = SDL_GetTicks();
-    Uint32 currentTicks = SDL_GetTicks();
-    Uint32 deltaTicks = currentTicks - prevTicks;
-    prevTicks = currentTicks;
-    return static_cast<float>(deltaTicks) / 1000.0f;
 }
 void gameUpdate(){}
 void gameRender()
