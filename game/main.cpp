@@ -1,5 +1,5 @@
-﻿#include <SDL.h>
-#include <SDL_image.h>
+﻿#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
 #include <thread>
 #include <vector>
@@ -22,6 +22,16 @@ float playerY = SCREEN_HEIGHT / 2 - PLAYER_SIZE / 2;
 
 // Background texture
 SDL_Texture* backgroundTexture = nullptr;
+
+float getDeltaTime() {
+    static Uint32 prevTicks = SDL_GetTicks();
+    Uint32 currentTicks = SDL_GetTicks();
+    Uint32 deltaTicks = currentTicks - prevTicks;
+    prevTicks = currentTicks;
+
+    // Convert milliseconds to seconds
+    return static_cast<float>(deltaTicks) / 1000.0f;
+}
 
 // Function to initialize SDL
 bool initSDL() {
@@ -100,16 +110,6 @@ void handleEvents(SDL_Event& event) {
 }
 
 // Function to get the time elapsed since the last frame
-float getDeltaTime() {
-    static Uint32 prevTicks = SDL_GetTicks();
-    Uint32 currentTicks = SDL_GetTicks();
-    Uint32 deltaTicks = currentTicks - prevTicks;
-    prevTicks = currentTicks;
-
-    // Convert milliseconds to seconds
-    return static_cast<float>(deltaTicks) / 1000.0f;
-}
-
 // Function to update game logic
 void updateGame() {
     // Add game logic here
