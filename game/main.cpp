@@ -4,12 +4,10 @@
 const int s_WIDTH = 1024;
 const int s_HEIGHT = 512;
 const int pSize = 32;
-	
-SDL_Window* window = nullptr;
-SDL_Renderer* renderer = nullptr;
-	
 int pX = s_WIDTH / 2 - pSize / 2;
 int pY = s_HEIGHT / 2 - pSize / 2;
+SDL_Window* window = nullptr;
+SDL_Renderer* renderer = nullptr;
 
 bool sdlInit()
 {
