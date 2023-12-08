@@ -64,7 +64,6 @@ float getDeltaTime()
     prevTicks = currentTicks;
     return static_cast<float>(deltaTicks) / 1000.0f;
 }
-
 void gameUpdate(){}
 void gameRender()
 {
