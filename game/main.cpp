@@ -41,16 +41,16 @@ void events(SDL_Event& event)
         else if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
-                    playerY -= PLAYER_SPEED * getDeltaTime();
+                    pY -= speed * getDeltaTime();
                     break;
                 case SDLK_DOWN:
-                    playerY += PLAYER_SPEED * getDeltaTime();
+                    pY += speed * getDeltaTime();
                     break;
                 case SDLK_LEFT:
-                    playerX -= PLAYER_SPEED * getDeltaTime();
+                    pX -= speed * getDeltaTime();
                     break;
                 case SDLK_RIGHT:
-                    playerX += PLAYER_SPEED * getDeltaTime();
+                    pX += speed * getDeltaTime();
                     break;
             }
         }
