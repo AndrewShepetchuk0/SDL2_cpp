@@ -89,7 +89,23 @@ int main() {
     }
 
     SDL_Event event;
-	
+
+    const unsigned int numThreads = std::thread::hardware_concurrency();
+    std::vector<std::thread> threads;
+
+    for (unsigned int i = 0; i < numThreads; ++i) 
+    {
+            threads.emplace_back([&]() {
+                gameUpdate();
+            });
+    }
+    for (auto& thread : threads) {
+            thread.join();
+        }
+        threads.clear();
+
+        gameRender();
+    }
     bool quit = false;
     while (!quit) {
         events(event);
